@@ -1,4 +1,3 @@
-import {Action} from 'path';
 import {USER_LOGGED_IN} from '../types';
 
 
