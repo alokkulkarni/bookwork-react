@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
-import { Form, Button, Message } from "semantic-ui-react";
+import PropTypes from 'prop-types';
+import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
 import InlineErrors from '../messages/InlineErrors';
 
@@ -15,19 +15,15 @@ class LoginForm extends Component {
     	errors: {},
     }
 
-    constructor(props) {
-        super(props);
-    }
-
     onSubmit = () => {
-    	console.log(this.state.data.email);
     	const errors = this.validate(this.state.data);
-    	this.setState({
-    	  errors: errors,
-    	});
+    	this.setState({errors});
 
     	if(Object.keys(errors).length === 0) {
-    		this.props.submit(this.state.data);
+            this.setState({ loading: true });
+    		this.props
+                    .submit(this.state.data)
+                    .catch(err => this.setState({errors: err.response.data.errors, loading: false}));
     	}
     }
 
@@ -45,17 +41,26 @@ class LoginForm extends Component {
 
         return (
             <Form className="ui form" onSubmit={this.onSubmit} loading={loading}>
+                
+                {errors.global && <Message negative>
+                                        <Message.Header>Something went Wrong !!</Message.Header>
+                                        <p>{errors.global}</p>
+                                  </Message>}
+
             	<Form.Field error={!!errors.email}>
             		<label htmlFor="email">Email</label>
           			<input type="text" id="email" name="email" placeholder="example@example.com" value={data.email} onChange={this.onChange} />
           			{errors.email && <InlineErrors text={errors.email} />}
             	</Form.Field>
+
             	<Form.Field error={!!errors.password}>
             		<label htmlFor="password">Password</label>
           			<input type="password" id="password" name="password" placeholder="Please enter your password" value={data.password} onChange={this.onChange} />
           			{errors.password && <InlineErrors text={errors.password} />}
             	</Form.Field>
+
             	<Button primary>Login</Button>
+
             </Form>
         );
     }
@@ -63,7 +68,7 @@ class LoginForm extends Component {
 
 
 LoginForm.propTypes = {
-  submit: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired
 }
 
 export default LoginForm;
