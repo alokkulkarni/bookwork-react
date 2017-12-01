@@ -98,7 +98,7 @@ class HomePage extends Component {
                               <Menu.Item as='a'>Blog</Menu.Item>
                               <Menu.Item as='a'>Articles</Menu.Item>
                               <Menu.Menu position='right'>
-                                {this.props.isAuthenticated ? <Menu.Item as='a' onClick={() => this.props.logout()}><Button primary>Logout</Button></Menu.Item> : <Menu.Item><Button inverted><Link to="/Login">Login</Link></Button></Menu.Item>}                        
+                                {this.props.isAuthenticated ? <Menu.Item as='a' onClick={() => this.props.logout()}><Button primary>Logout</Button></Menu.Item> : <Menu.Item><Button inverted><Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link></Button></Menu.Item>}                        
                               </Menu.Menu>
                         </Container>
                     </Menu>

@@ -5,13 +5,13 @@ import {connect} from 'react-redux';
 
 
 
-const UserRoute = ({component: Component, ...rest, isAuthenticated }) => {
+const GuestRoute = ({component: Component, ...rest, isAuthenticated }) => {
     return (
         <Route {...rest} render={props => !isAuthenticated ? <Component {...props}/> : <Redirect to="/dashboard" />}></Route>
     );
 };
 
-UserRoute.propTypes = {
+GuestRoute.propTypes = {
 	component : PropTypes.func.isRequired,
 	isAuthenticated: PropTypes.bool.isRequired,
 };
@@ -23,4 +23,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(UserRoute);
+export default connect(mapStateToProps)(GuestRoute);
