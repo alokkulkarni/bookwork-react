@@ -81,31 +81,20 @@ class HomePage extends Component {
     render() {
         return (
         	<div>
-                <Visibility
-                  onBottomPassed={this.stickTopMenu}
-                  onBottomVisible={this.unStickTopMenu}
-                  once={true}>
-                    <Menu
-                        borderless
-                        fixed={"top"}
-                        style={this.state.menuFixed ? fixedMenuStyle : menuStyle}>
-                        <Container>
-                              <Menu.Item>
-                                <Image size='mini' src='https://react.semantic-ui.com/logo.png' />
-                              </Menu.Item>
-                              <Menu.Item header>Home Page</Menu.Item>
-                              <Menu.Item as='a'>About</Menu.Item>
-                              <Menu.Item as='a'>Blog</Menu.Item>
-                              <Menu.Item as='a'>Articles</Menu.Item>
-                              <Menu.Menu position='right'>
-                                {this.props.isAuthenticated ? <Menu.Item as='a' onClick={() => this.props.logout()}><Button primary>Logout</Button></Menu.Item> : <Menu.Item><Button inverted><Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link></Button></Menu.Item>}                        
-                              </Menu.Menu>
-                        </Container>
-                    </Menu>
-                </Visibility>
-		  	</div>
-
-            
+            <Menu ui secondary pointing stackable>
+                <Menu.Item>
+                  <Image size='mini' src='https://react.semantic-ui.com/logo.png' />
+                </Menu.Item>
+                <Menu.Item header>Home Page</Menu.Item>
+                <Menu.Item as='a'>About</Menu.Item>
+                <Menu.Item as='a'>Blog</Menu.Item>
+                <Menu.Item as='a'>Articles</Menu.Item>
+                <Menu.Menu position='right'>
+                  <Menu.Item as={Link} to="/login">Login</Menu.Item>
+                  <Menu.Item as={Link} to="/signup">Register</Menu.Item>                        
+                </Menu.Menu>
+            </Menu>
+  		  	</div>          
         );
     }
 }
@@ -121,4 +110,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { logout: actions.logout })(HomePage);
+export default connect(mapStateToProps, {})(HomePage);

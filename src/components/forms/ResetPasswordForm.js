@@ -4,11 +4,11 @@ import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
 import InlineErrors from '../messages/InlineErrors';
 
-class SignupForm extends Component {
+class ResetPasswordForm extends Component {
 
     state = {
     	data: {
-    		email: '',
+    		token: this.props.token,
     		password: '',
     		confirmPassword: '',
     	},
@@ -16,7 +16,8 @@ class SignupForm extends Component {
     	errors: {},
     }
 
-    onSubmit = () => {
+    onSubmit = e => {
+        e.preventDefault();
     	const errors = this.validate(this.state.data);
     	this.setState({errors});
 
@@ -30,7 +31,6 @@ class SignupForm extends Component {
 
     validate = (data) => {
     	const errors = {};
-    	if (!Validator.isEmail(data.email)) errors.email = "Invalid Email";
     	if (!data.password) errors.password = "can't be blank";
     	if (data.password !== data.confirmPassword) errors.confirmPassword = "Passwords does not match";
     	return errors;
@@ -48,12 +48,6 @@ class SignupForm extends Component {
                                         <Message.Header>Something went Wrong !!</Message.Header>
                                         <p>{errors.global}</p>
                                   </Message>}
-
-            	<Form.Field error={!!errors.email}>
-            		<label htmlFor="email">Email</label>
-          			<input type="text" id="email" name="email" placeholder="example@example.com" value={data.email} onChange={this.onChange} />
-          			{errors.email && <InlineErrors text={errors.email} />}
-            	</Form.Field>
 
             	<Form.Field error={!!errors.password}>
             		<label htmlFor="password">Password</label>
@@ -75,8 +69,9 @@ class SignupForm extends Component {
 }
 
 
-SignupForm.propTypes = {
-  submit: PropTypes.func.isRequired
+ResetPasswordForm.propTypes = {
+  submit: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired
 }
 
-export default SignupForm;
+export default ResetPasswordForm;
