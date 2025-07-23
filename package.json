@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.30.0",
     "gravatar-url": "^2.0.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.1.0",
-    "react-dom": "^16.1.0",
+    "react-dom": "^19.1.0",
     "react-intl": "^2.4.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
